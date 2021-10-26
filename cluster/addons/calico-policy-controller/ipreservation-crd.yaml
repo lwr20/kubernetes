@@ -3,14 +3,14 @@ kind: CustomResourceDefinition
 metadata:
   labels:
     addonmanager.kubernetes.io/mode: Reconcile
-  name: ipamhandles.crd.projectcalico.org
+  name: ipreservations.crd.projectcalico.org
 spec:
   group: crd.projectcalico.org
   names:
-    kind: IPAMHandle
-    listKind: IPAMHandleList
-    plural: ipamhandles
-    singular: ipamhandle
+    kind: IPReservation
+    listKind: IPReservationList
+    plural: ipreservations
+    singular: ipreservation
   scope: Cluster
   versions:
   - name: v1
@@ -30,20 +30,15 @@ spec:
           metadata:
             type: object
           spec:
-            description: IPAMHandleSpec contains the specification for an IPAMHandle
+            description: IPReservationSpec contains the specification for an IPReservation
               resource.
             properties:
-              block:
-                additionalProperties:
-                  type: integer
-                type: object
-              deleted:
-                type: boolean
-              handleID:
-                type: string
-            required:
-            - block
-            - handleID
+              reservedCIDRs:
+                description: ReservedCIDRs is a list of CIDRs and/or IP addresses
+                  that Calico IPAM will exclude from new allocations.
+                items:
+                  type: string
+                type: array
             type: object
         type: object
     served: true

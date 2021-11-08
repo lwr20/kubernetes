@@ -164,7 +164,7 @@ spec:
         # Used to install CNI binaries.
         - name: cni-bin-dir
           hostPath:
-            path: __CALICO_CNI_DIR__
+            path: /opt/cni/bin
         # Used to install CNI network config.
         - name: cni-net-dir
           hostPath:
